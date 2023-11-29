@@ -9,6 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Resources/texture.hpp"
+#include "time.hpp"
 
 class Entity
 {
@@ -17,6 +18,10 @@ public:
     Entity();
 
     void initialize_entity(unsigned int m_Entity_index);
+    virtual void update(Time* time)
+    {
+
+    }
 
     glm::vec3 position;
     glm::vec3 size;

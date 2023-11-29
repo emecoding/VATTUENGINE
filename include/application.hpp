@@ -11,6 +11,7 @@
 #include "Resources/resource_manager.hpp"
 #include "Scene/scene_manager.hpp"
 #include "Entity/camera.hpp"
+#include "time.hpp"
 
 #include "Entity/entity.hpp"
 
@@ -30,6 +31,7 @@ private:
     ConfigReader* m_ConfigReader;
     SceneManager* m_SceneManager;
     ResourceManager* m_ResourceManager;
+    Time* m_Time;
 
     void initialize_glfw();
     void initialize_glad();

@@ -11,4 +11,5 @@ public:
     Camera();
 
     glm::mat4 get_orthographic_projection(unsigned int width, unsigned int height);
+    glm::mat4 get_view_projection();
 };

@@ -1,11 +1,13 @@
 #include "application.hpp"
 
+#include "Entity/example_player.hpp"
+
 Application::Application()
 {
-    
     m_ConfigReader = new ConfigReader("config.txt");
     m_SceneManager = new SceneManager();
     m_ResourceManager = new ResourceManager();
+    m_Time = new Time();
 
     initialize_glfw();
     
@@ -14,6 +16,8 @@ Application::Application()
     initialize_glad();
 
     m_Renderer = new Renderer(m_SceneManager, m_Window);
+
+    m_Time->initialize_time();
 }
 
 void Application::run()
@@ -21,28 +25,36 @@ void Application::run()
     Shader example_shader = m_ResourceManager->create_shader("EXAMPLE", "res/shaders/example_vert_shader.vs", "res/shaders/example_frag_shader.fs");
     m_ResourceManager->create_texture("EXAMPLE_TEXTURE", "res/textures/example_texture.png");
 
-    Scene example_scene = m_SceneManager->add_scene("EXAMPLE SCENE");
-    example_scene.set_scene_camera(example_scene.create_basic_camera());
+    Scene* example_scene = m_SceneManager->add_scene("EXAMPLE SCENE");
+    Camera* camera = example_scene->set_scene_camera(example_scene->create_basic_camera());
+    //example_scene.set_scene_camera(example_scene.create_basic_camera());
+    //example_scene.create_basic_camera();
+    example_scene->add_entity(new ExamplePlayer());
 
-    Entity example_entity = example_scene.add_entity();
-    example_entity.texture = m_ResourceManager->get_texture("EXAMPLE_TEXTURE");
 
-    example_entity.position.x = 100.0f;
-    example_entity.position.y = 100.0f;
-    example_entity.position.z = 0.0f;
+    Entity* example_entity = example_scene->add_entity();
+    example_entity->texture = m_ResourceManager->get_texture("EXAMPLE_TEXTURE");
 
-    example_entity.size.x = 100.0f;
-    example_entity.size.y = 100.0f;
-    example_entity.size.z = 1.0f;
+    example_entity->position.x = 100.0f;
+    example_entity->position.y = 100.0f;
+    example_entity->position.z = 0.0f;
+
+    example_entity->size.x = 100.0f;
+    example_entity->size.y = 100.0f;
+    example_entity->size.z = 1.0f;
 
     example_shader.use();
 
     while(!m_Window->should_close())
     {
+        m_Time->update_time();
+
         m_Window->clear();
         m_Window->process_window_related_input();
 
-        m_Renderer->render_entity(example_entity, example_shader);
+        m_SceneManager->get_current_scene()->run_scene(m_Time);
+
+        m_Renderer->render_entity(*example_entity, example_shader);
 
         m_Window->swap_buffers();
         m_Window->poll_events();
