@@ -17,6 +17,8 @@ public:
 
     unsigned int get_ID() { return m_ID; }
 
+    void use() { glUseProgram(m_ID); }
+
 private:
     std::string read_data_from_shader_file(const char* path);
 

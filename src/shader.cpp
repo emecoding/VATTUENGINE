@@ -79,6 +79,8 @@ unsigned int Shader::create_shader_program(unsigned int vertex_shader, unsigned 
     glDeleteShader(vertex_shader);
     glDeleteShader(fragment_shader);
 
+    glUseProgram(0);
+
     return program;
 
 

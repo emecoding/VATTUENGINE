@@ -11,6 +11,9 @@
 #include "Resources/resource_manager.hpp"
 #include "Scene/scene_manager.hpp"
 
+#include "Entity/entity.hpp"
+
+
 class Application
 {
 

@@ -20,3 +20,27 @@ Shader ResourceManager::get_shader(std::string name)
             return m_Shaders[i];
     }
 }
+
+Texture ResourceManager::create_texture(std::string name, const char* file_path)
+{
+    Texture texture = Texture(name, file_path);
+    m_Textures.push_back(texture);
+    return texture;
+}
+
+Texture ResourceManager::get_texture(std::string name)
+{
+    for(int i = 0; i < m_Textures.size(); i++)
+    {
+        if(m_Textures[i].get_name() == name)
+            return m_Textures[i];
+    }
+}
+
+void ResourceManager::terminate_resources()
+{
+    for(int i = 0; i < m_Shaders.size(); i++)
+    {
+        glDeleteProgram(m_Shaders[i].get_ID());
+    }
+}
