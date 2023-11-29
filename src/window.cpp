@@ -22,7 +22,6 @@ void Window::initialize_window()
         std::exit(-1);   
     }
 
-    
 
     glfwMakeContextCurrent(m_GLFWWindow);
 }

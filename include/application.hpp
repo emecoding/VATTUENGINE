@@ -5,7 +5,11 @@
 
 
 #include "Window/window.hpp"
+#include "Renderer/renderer.hpp"
 #include "config_reader.hpp"
+#include "Resources/shader.hpp"
+#include "Resources/resource_manager.hpp"
+#include "Scene/scene_manager.hpp"
 
 class Application
 {
@@ -18,7 +22,10 @@ public:
     
 private:
     Window* m_Window;
+    Renderer* m_Renderer;
     ConfigReader* m_ConfigReader;
+    SceneManager* m_SceneManager;
+    ResourceManager* m_ResourceManager;
 
     void initialize_glfw();
     void initialize_glad();

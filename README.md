@@ -10,5 +10,5 @@ glm:
 
 
 TODO:
-    [ ] Read from config file
+    [x] Read from config file
         - Create 'config_reader' class which reads from a config file in root directory.
