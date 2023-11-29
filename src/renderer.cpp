@@ -1,7 +1,9 @@
 #include "Renderer/renderer.hpp"
 
-Renderer::Renderer()
+Renderer::Renderer(SceneManager* scene_manager, Window* window)
 {
+    m_Scene_manager = scene_manager;
+    m_Window = window;
     initialize_render_data();
 }
 
@@ -36,8 +38,11 @@ void Renderer::initialize_render_data()
 }
 
 
-void Renderer::render_entity(Entity entity)
-{
+void Renderer::render_entity(Entity entity, Shader shader)
+{   
+    shader.set_uniform("projection", m_Scene_manager->get_current_scene().get_scene_camera().get_orthographic_projection(m_Window->get_width(), m_Window->get_height()));
+    shader.set_uniform("transform", entity.create_transform_matrix());
+
     entity.texture.use();
     glBindVertexArray(m_Sprite_VAO);
     glDrawArrays(GL_TRIANGLES, 0, 6);

@@ -16,6 +16,9 @@ public:
 
     bool should_close();
 
+    unsigned int get_width() { return m_Width; }
+    unsigned int get_height() { return m_Height; }
+
     void clear();
     void process_window_related_input();
     void swap_buffers();

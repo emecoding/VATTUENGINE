@@ -82,6 +82,9 @@ unsigned int Shader::create_shader_program(unsigned int vertex_shader, unsigned 
     glUseProgram(0);
 
     return program;
+}
 
-
+void Shader::set_uniform(const char* name, glm::mat4 mat4)
+{
+    glUniformMatrix4fv(glGetUniformLocation(m_ID, name), 1, false, glm::value_ptr(mat4));
 }

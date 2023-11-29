@@ -10,6 +10,7 @@
 #include "Resources/shader.hpp"
 #include "Resources/resource_manager.hpp"
 #include "Scene/scene_manager.hpp"
+#include "Entity/camera.hpp"
 
 #include "Entity/entity.hpp"
 
